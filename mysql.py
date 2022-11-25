@@ -99,7 +99,7 @@ data_customer
 sql  = "INSERT INTO customers1(Ten,DiaChi,SoDienThoai) values (%s, %s, %s)"
 
         
-cursor.executemany(sql,arr_cus)
+cursor.executemany(sql,data_customer)
 conn.commit()
 
 
