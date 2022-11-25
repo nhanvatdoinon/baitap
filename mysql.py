@@ -55,68 +55,42 @@ customer = '''create table customers(
 cursor.execute(customer1)
 
 
-# In[ ]:
+# In[17]:
 
 
 response_get_customer = requests.get("https://007af9e4efaee0e02d3101cce3eb07b3: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@luxury-4832.myshopify.com/admin/api/2022-10/customers.json?limit=100")
 
 
-# In[274]:
+# In[18]:
 
 
 json_file=response_get_customer.json()
 json_file
 
 
-# In[275]:
+# In[19]:
 
 
 json_file['customers'][0]['first_name']
 
 
-# In[276]:
+# In[20]:
 
 
 arr_ten = []
+arr_diachi = []
+arr_sdt = []
+data_customer = []
 for i in range(3):
     ten = json_file['customers'][i]['first_name']
-    arr_ten.append(ten)
-arr_ten
-
-
-# In[277]:
-
-
-arr_sdt = []
-
-for i in range(3):
-    sdt = json_file['customers'][i]['phone']
-    sdt = sdt.strip('+')
-    arr_sdt.append(sdt)
-arr_sdt 
-
-
-
-# In[278]:
-
-
-arr_diachi = []
-for i in range(3):
     diachi = json_file['customers'][i]['addresses'][0]['city']
+    sdt = json_file['customers'][i]['phone']
+    arr_ten.append(ten)
     arr_diachi.append(diachi)
-arr_diachi 
-
-
-# In[279]:
-
-
-
-arr_cus = []
-for i in range(3):
+    arr_sdt.append(sdt)
     val = [arr_ten[i],arr_diachi[i],arr_sdt[i]]
-    arr_cus.append(val)
-arr_cus
-        
+    data_customer.append(val)
+data_customer
 
 
 # In[280]:
@@ -162,13 +136,13 @@ product = '''create table products(
 cursor.execute(product)
 
 
-# In[ ]:
+# In[4]:
 
 
+response_get_product = requests.get("https://007af9e4efaee0e02d3101cce3eb07b3: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@luxury-4832.myshopify.com/admin/api/2022-10/products.json?limit=100")
 
 
-
-# In[282]:
+# In[5]:
 
 
 data_product = response_get_product.json()
@@ -181,37 +155,32 @@ data_product
 len((data_product)['products'])
 
 
+# In[8]:
+
+
+data_product['products'][0]['title']
+
+
 # In[284]:
 
 
 data_product['products'][0]['variants'][0]['price']
 
 
-# In[285]:
+# In[14]:
 
 
+arr_title = []
 arr_price = []
-for i in range(18):
-    price = data_product['products'][i]['variants'][0]['price']
-    arr_price.append(price)
-arr_price
-
-
-# In[286]:
-
-
 arr_quantity = []
-for i in range(18):
-    quantity = data_product['products'][i]['variants'][0]['inventory_quantity']
-    arr_quantity.append(quantity)
-arr_quantity
-
-
-# In[287]:
-
-
 data = []
 for i in range(18):
+    title = data_product['products'][i]['title']
+    price = data_product['products'][i]['variants'][0]['price']
+    quantity = data_product['products'][i]['variants'][0]['inventory_quantity']
+    arr_title.append(title)
+    arr_price.append(price)
+    arr_quantity.append(quantity)
     ttin= [arr_title[i],arr_price[i],arr_quantity[i]]
     data.append(ttin)
 data
